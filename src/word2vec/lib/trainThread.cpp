@@ -95,12 +95,13 @@ namespace w2v {
                     if (word.empty()) {
                         break; // end of sentence
                     }
-
+                    
                     auto wordData = m_sharedData.vocabulary->data(word);
                     if (wordData == nullptr) {
                         continue; // no such word
                     }
-
+                    Rcpp::Rcout << "word: " << word << ", "; 
+                    Rcpp::Rcout << "wordData:" << wordData << "\n";
                     threadProcessedWords++;
 
                     if (m_sharedData.trainSettings->sample > 0.0f) { // down-sampling...

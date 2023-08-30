@@ -18,6 +18,9 @@
 #include "word2vec.hpp"
 #include "mapper.hpp"
 
+typedef std::vector<std::string> Text;
+typedef std::vector<Text> Texts;
+
 namespace w2v {
     /**
      * @brief vocabulary class - implements fast access to a words storage with their data - index and frequency.
@@ -66,6 +69,13 @@ namespace w2v {
                      std::shared_ptr<fileMapper_t> &_stopWordsMapper,
                      const std::string &_wordDelimiterChars,
                      const std::string &_endOfSentenceChars,
+                     uint16_t _minFreq,
+                     w2vModel_t::vocabularyProgressCallback_t _progressCallback,
+                     w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;
+        
+        vocabulary_t(//std::shared_ptr<fileMapper_t> &_trainWordsMapper,
+                     //std::shared_ptr<fileMapper_t> &_stopWordsMapper,
+                     Texts texts,
                      uint16_t _minFreq,
                      w2vModel_t::vocabularyProgressCallback_t _progressCallback,
                      w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;
