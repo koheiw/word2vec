@@ -18,9 +18,6 @@
 #include "word2vec.hpp"
 #include "mapper.hpp"
 
-typedef std::vector<std::string> Text;
-typedef std::vector<Text> Texts;
-
 namespace w2v {
     /**
      * @brief vocabulary class - implements fast access to a words storage with their data - index and frequency.

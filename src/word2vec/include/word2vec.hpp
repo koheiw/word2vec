@@ -19,6 +19,9 @@
 #include <cmath>
 #include <stdexcept>
 
+typedef std::vector<std::string> Text;
+typedef std::vector<Text> Texts;
+
 namespace w2v {
     /**
      * @brief trainSettings structure holds all training parameters
@@ -273,6 +276,12 @@ namespace w2v {
         bool train(const trainSettings_t &_trainSettings,
                    const std::string &_trainFile,
                    const std::string &_stopWordsFile,
+                   vocabularyProgressCallback_t _vocabularyProgressCallback,
+                   vocabularyStatsCallback_t _vocabularyStatsCallback,
+                   trainProgressCallback_t _trainProgressCallback) noexcept;
+        
+        bool train(const trainSettings_t &_trainSettings,
+                   Texts texts,
                    vocabularyProgressCallback_t _vocabularyProgressCallback,
                    vocabularyStatsCallback_t _vocabularyStatsCallback,
                    trainProgressCallback_t _trainProgressCallback) noexcept;
