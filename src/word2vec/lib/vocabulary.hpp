@@ -62,20 +62,18 @@ namespace w2v {
          * @param _statsCallback callback function to be called on train data loaded event to pass vocabulary size,
          * train words and total words amounts.
         */
-        vocabulary_t(std::shared_ptr<fileMapper_t> &_trainWordsMapper,
-                     std::shared_ptr<fileMapper_t> &_stopWordsMapper,
-                     const std::string &_wordDelimiterChars,
-                     const std::string &_endOfSentenceChars,
-                     uint16_t _minFreq,
-                     w2vModel_t::vocabularyProgressCallback_t _progressCallback,
-                     w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;
+        // vocabulary_t(std::shared_ptr<fileMapper_t> &_trainWordsMapper,
+        //              std::shared_ptr<fileMapper_t> &_stopWordsMapper,
+        //              const std::string &_wordDelimiterChars,
+        //              const std::string &_endOfSentenceChars,
+        //              uint16_t _minFreq,
+        //              w2vModel_t::vocabularyProgressCallback_t _progressCallback,
+        //              w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;
         
         vocabulary_t(//std::shared_ptr<fileMapper_t> &_trainWordsMapper,
                      //std::shared_ptr<fileMapper_t> &_stopWordsMapper,
-                     Texts texts,
-                     uint16_t _minFreq,
-                     w2vModel_t::vocabularyProgressCallback_t _progressCallback,
-                     w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;
+                     std::vector<std::string> words,
+                     std::vector<std::size_t> freqs) noexcept;
 
         /**
          * Requests a data (index, frequency, word) associated with the _word
