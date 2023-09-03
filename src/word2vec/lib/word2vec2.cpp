@@ -13,25 +13,21 @@
 
 namespace w2v {
     bool w2vModel_t::train(const trainSettings_t &_trainSettings,
-                           const std::string &_trainFile,
-                           const std::string &_stopWordsFile,
+                           Texts texts,
                            vocabularyProgressCallback_t _vocabularyProgressCallback,
                            vocabularyStatsCallback_t _vocabularyStatsCallback,
                            trainProgressCallback_t _trainProgressCallback) noexcept {
         try {
             // map train data set file to memory
-            std::shared_ptr<fileMapper_t> trainWordsMapper(new fileMapper_t(_trainFile));
+            // std::shared_ptr<fileMapper_t> trainWordsMapper(new fileMapper_t(_trainFile));
             // map stop-words file to memory
-            std::shared_ptr<fileMapper_t> stopWordsMapper;
-            if (!_stopWordsFile.empty()) {
-                stopWordsMapper.reset(new fileMapper_t(_stopWordsFile));
-            }
+            // std::shared_ptr<fileMapper_t> stopWordsMapper;
+            // if (!_stopWordsFile.empty()) {
+            //     stopWordsMapper.reset(new fileMapper_t(_stopWordsFile));
+            // }
 
             // build vocabulary, skip stop-words and words with frequency < minWordFreq
-            std::shared_ptr<vocabulary_t> vocabulary(new vocabulary_t(trainWordsMapper,
-                                                                      stopWordsMapper,
-                                                                      _trainSettings.wordDelimiterChars,
-                                                                      _trainSettings.endOfSentenceChars,
+            std::shared_ptr<vocabulary_t> vocabulary(new vocabulary_t(texts,
                                                                       _trainSettings.minWordFreq,
                                                                       _vocabularyProgressCallback,
                                                                       _vocabularyStatsCallback));
@@ -45,7 +41,7 @@ namespace w2v {
             std::vector<float> _trainMatrix;
             trainer_t(std::make_shared<trainSettings_t>(_trainSettings),
                       vocabulary,
-                      trainWordsMapper,
+                      texts,
                       _trainProgressCallback)(_trainMatrix);
 
             std::size_t wordIndex = 0;

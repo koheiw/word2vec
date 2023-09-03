@@ -42,17 +42,18 @@ namespace w2v {
             m_hiddenLayerVals.reset(new std::vector<float>(m_sharedData.trainSettings->size));
         }
 
-        if (!m_sharedData.fileMapper) {
-            throw std::runtime_error("file mapper object is not initialized");
-        }
-        auto shift = m_sharedData.fileMapper->size() / m_sharedData.trainSettings->threads;
+        // if (!m_sharedData.fileMapper) {
+        //     throw std::runtime_error("file mapper object is not initialized");
+        // }
+        auto shift = m_sharedData.texts->size() / m_sharedData.trainSettings->threads;
         auto startFrom = shift * _id;
-        auto stopAt = (_id == m_sharedData.trainSettings->threads - 1)
-                      ? (m_sharedData.fileMapper->size() - 1) : (shift * (_id + 1));
-        m_wordReader.reset(new wordReader_t<fileMapper_t>(*m_sharedData.fileMapper,
-                                                          m_sharedData.trainSettings->wordDelimiterChars,
-                                                          m_sharedData.trainSettings->endOfSentenceChars,
-                                                          startFrom, stopAt));
+        // NOTE: change to Texts?
+        // auto stopAt = (_id == m_sharedData.trainSettings->threads - 1)
+        //               ? (m_sharedData.fileMapper->size() - 1) : (shift * (_id + 1));
+        // m_wordReader.reset(new wordReader_t<fileMapper_t>(*m_sharedData.fileMapper,
+        //                                                   m_sharedData.trainSettings->wordDelimiterChars,
+        //                                                   m_sharedData.trainSettings->endOfSentenceChars,
+        //                                                   startFrom, stopAt));
     }
 
     void trainThread_t::worker(std::vector<float> &_trainMatrix) noexcept {

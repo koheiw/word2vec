@@ -273,12 +273,12 @@ namespace w2v {
          * nullptr if training progress statistic is not needed
          * @returns true on successful completion or false otherwise
         */
-        bool train(const trainSettings_t &_trainSettings,
-                   const std::string &_trainFile,
-                   const std::string &_stopWordsFile,
-                   vocabularyProgressCallback_t _vocabularyProgressCallback,
-                   vocabularyStatsCallback_t _vocabularyStatsCallback,
-                   trainProgressCallback_t _trainProgressCallback) noexcept;
+        // bool train(const trainSettings_t &_trainSettings,
+        //            const std::string &_trainFile,
+        //            const std::string &_stopWordsFile,
+        //            vocabularyProgressCallback_t _vocabularyProgressCallback,
+        //            vocabularyStatsCallback_t _vocabularyStatsCallback,
+        //            trainProgressCallback_t _trainProgressCallback) noexcept;
         
         bool train(const trainSettings_t &_trainSettings,
                    Texts texts,

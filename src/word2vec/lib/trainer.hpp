@@ -39,10 +39,10 @@ namespace w2v {
          * @param _fileMapper fileMapper object related to a train data set file
          * @param _progressCallback callback function to be called on each new 0.01% processed train data
         */
-        trainer_t(const std::shared_ptr<trainSettings_t> &_trainSettings,
-                  const std::shared_ptr<vocabulary_t> &_vocabulary,
-                  const std::shared_ptr<fileMapper_t> &_fileMapper,
-                  std::function<void(float, float)> _progressCallback);
+        // trainer_t(const std::shared_ptr<trainSettings_t> &_trainSettings,
+        //           const std::shared_ptr<vocabulary_t> &_vocabulary,
+        //           const std::shared_ptr<fileMapper_t> &_fileMapper,
+        //           std::function<void(float, float)> _progressCallback);
         
         trainer_t(const std::shared_ptr<trainSettings_t> &_trainSettings,
                  const std::shared_ptr<vocabulary_t> &_vocabulary,
