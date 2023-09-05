@@ -11,14 +11,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // w2v_train
-Rcpp::List w2v_train(std::string trainFile, std::string modelFile, std::string stopWordsFile, uint16_t minWordFreq, uint16_t size, uint8_t window, uint16_t expTableSize, uint8_t expValueMax, float sample, bool withHS, uint8_t negative, uint8_t threads, uint8_t iterations, float alpha, bool withSG, std::string wordDelimiterChars, std::string endOfSentenceChars, bool verbose, bool normalize);
-RcppExport SEXP _word2vec_w2v_train(SEXP trainFileSEXP, SEXP modelFileSEXP, SEXP stopWordsFileSEXP, SEXP minWordFreqSEXP, SEXP sizeSEXP, SEXP windowSEXP, SEXP expTableSizeSEXP, SEXP expValueMaxSEXP, SEXP sampleSEXP, SEXP withHSSEXP, SEXP negativeSEXP, SEXP threadsSEXP, SEXP iterationsSEXP, SEXP alphaSEXP, SEXP withSGSEXP, SEXP wordDelimiterCharsSEXP, SEXP endOfSentenceCharsSEXP, SEXP verboseSEXP, SEXP normalizeSEXP) {
+Rcpp::List w2v_train(Rcpp::List texts_, std::string modelFile, Rcpp::CharacterVector stopWords_, uint16_t minWordFreq, uint16_t size, uint8_t window, uint16_t expTableSize, uint8_t expValueMax, float sample, bool withHS, uint8_t negative, uint8_t threads, uint8_t iterations, float alpha, bool withSG, std::string wordDelimiterChars, std::string endOfSentenceChars, bool verbose, bool normalize);
+RcppExport SEXP _word2vec_w2v_train(SEXP texts_SEXP, SEXP modelFileSEXP, SEXP stopWords_SEXP, SEXP minWordFreqSEXP, SEXP sizeSEXP, SEXP windowSEXP, SEXP expTableSizeSEXP, SEXP expValueMaxSEXP, SEXP sampleSEXP, SEXP withHSSEXP, SEXP negativeSEXP, SEXP threadsSEXP, SEXP iterationsSEXP, SEXP alphaSEXP, SEXP withSGSEXP, SEXP wordDelimiterCharsSEXP, SEXP endOfSentenceCharsSEXP, SEXP verboseSEXP, SEXP normalizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type trainFile(trainFileSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type texts_(texts_SEXP);
     Rcpp::traits::input_parameter< std::string >::type modelFile(modelFileSEXP);
-    Rcpp::traits::input_parameter< std::string >::type stopWordsFile(stopWordsFileSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type stopWords_(stopWords_SEXP);
     Rcpp::traits::input_parameter< uint16_t >::type minWordFreq(minWordFreqSEXP);
     Rcpp::traits::input_parameter< uint16_t >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< uint8_t >::type window(windowSEXP);
@@ -35,7 +35,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type endOfSentenceChars(endOfSentenceCharsSEXP);
     Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
     Rcpp::traits::input_parameter< bool >::type normalize(normalizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(w2v_train(trainFile, modelFile, stopWordsFile, minWordFreq, size, window, expTableSize, expValueMax, sample, withHS, negative, threads, iterations, alpha, withSG, wordDelimiterChars, endOfSentenceChars, verbose, normalize));
+    rcpp_result_gen = Rcpp::wrap(w2v_train(texts_, modelFile, stopWords_, minWordFreq, size, window, expTableSize, expValueMax, sample, withHS, negative, threads, iterations, alpha, withSG, wordDelimiterChars, endOfSentenceChars, verbose, normalize));
     return rcpp_result_gen;
 END_RCPP
 }

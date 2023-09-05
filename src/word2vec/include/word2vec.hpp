@@ -21,6 +21,7 @@
 
 typedef std::vector<std::string> Text;
 typedef std::vector<Text> Texts;
+typedef std::vector<std::string> Types;
 
 namespace w2v {
     /**
