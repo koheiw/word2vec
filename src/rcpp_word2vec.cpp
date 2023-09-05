@@ -58,8 +58,8 @@ Rcpp::List w2v_train(std::string trainFile, std::string modelFile, std::string s
   trainSettings.iterations = iterations;
   trainSettings.alpha = alpha;
   trainSettings.withSG = withSG;
-  trainSettings.wordDelimiterChars = wordDelimiterChars;
-  trainSettings.endOfSentenceChars = endOfSentenceChars;
+  //trainSettings.wordDelimiterChars = wordDelimiterChars;
+  //trainSettings.endOfSentenceChars = endOfSentenceChars;
   Rcpp::XPtr<w2v::w2vModel_t> model(new w2v::w2vModel_t(), true);
   bool trained;
   

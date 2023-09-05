@@ -39,8 +39,8 @@ namespace w2v {
         uint8_t iterations = 5; ///< train iterations
         float alpha = 0.05f; ///< starting learn rate
         bool withSG = false; ///< use Skip-Gram instead of CBOW
-        std::string wordDelimiterChars = " \n,.-!?:;/\"#$%&'()*+<=>@[]\\^_`{|}~\t\v\f\r";
-        std::string endOfSentenceChars = ".\n?!";
+        //std::string wordDelimiterChars = " \n,.-!?:;/\"#$%&'()*+<=>@[]\\^_`{|}~\t\v\f\r";
+        //std::string endOfSentenceChars = ".\n?!";
         trainSettings_t() = default;
     };
 
@@ -281,7 +281,8 @@ namespace w2v {
         //            trainProgressCallback_t _trainProgressCallback) noexcept;
         
         bool train(const trainSettings_t &_trainSettings,
-                   Texts texts,
+                   const Texts &_texts,
+                   const std::vector<std::string> &_stopWords,
                    vocabularyProgressCallback_t _vocabularyProgressCallback,
                    vocabularyStatsCallback_t _vocabularyStatsCallback,
                    trainProgressCallback_t _trainProgressCallback) noexcept;
