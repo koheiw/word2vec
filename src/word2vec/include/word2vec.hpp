@@ -19,11 +19,46 @@
 #include <cmath>
 #include <stdexcept>
 
-typedef std::vector<std::string> Text;
-typedef std::vector<Text> Texts;
-typedef std::vector<std::string> Types;
+typedef std::vector<std::string> words_t;
+typedef std::vector<std::string> text_t;
+typedef std::vector<text_t> texts_t;
 
 namespace w2v {
+    
+    class corpus_t final {
+    public:
+        texts_t data;
+        
+        // Constructors
+        corpus_t(texts_t texts): data(texts) {}
+        
+        // Methods
+        // const text_t & operator[](std::size_t i) const {
+        //     return data[i];
+        // }
+        // 
+        // size_t size() {
+        //     return data.size();
+        // }
+    };
+
+    class stopWords_t final {
+    public:
+        words_t data; 
+        
+        // Constructors  
+        stopWords_t(std::vector<std::string> words): data(words) {}
+        
+        // Methods
+        // std::string & operator[](std::size_t i) {
+        //     return data[i];
+        // }
+        // 
+        // size_t size() {
+        //     return data.size();
+        // }
+    };
+
     /**
      * @brief trainSettings structure holds all training parameters
      */
@@ -282,8 +317,10 @@ namespace w2v {
         //            trainProgressCallback_t _trainProgressCallback) noexcept;
         
         bool train(const trainSettings_t &_trainSettings,
-                   const Texts &_texts,
-                   const std::vector<std::string> &_stopWords,
+                   corpus_t &_corpus,
+                   stopWords_t &_stopWords,
+                   //const corpus_t &_corpus,
+                   //const stopWords_t &_stopWords,
                    vocabularyProgressCallback_t _vocabularyProgressCallback,
                    vocabularyStatsCallback_t _vocabularyStatsCallback,
                    trainProgressCallback_t _trainProgressCallback) noexcept;

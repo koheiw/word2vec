@@ -14,8 +14,10 @@ namespace w2v {
                                //std::shared_ptr<fileMapper_t> &_stopWordsMapper,
                                //const std::string &_wordDelimiterChars,
                                //const std::string &_endOfSentenceChars,
-                               const Texts &texts,
-                               const std::vector<std::string> stopWords,
+                               //std::shared_ptr<corpus_t> &corpus,
+                               //std::shared_ptr<stopWords_t> &stopWords,
+                               const corpus_t &corpus,
+                               const stopWords_t &stopWords,
                                uint16_t _minFreq,
                                w2vModel_t::vocabularyProgressCallback_t _progressCallback,
                                w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept: m_words() {
@@ -36,11 +38,50 @@ namespace w2v {
         };
         std::unordered_map<std::string, tmpWordData_t> tmpWords;
         //off_t progressOffset = 0;
+        
+        for (auto &text:corpus.data) {
+            for (auto &word:text) {
+                // padding
+                if (word.empty()) {
+                    continue;
+                }
+                // last word
+                // if (&word == &text.back()) {
+                //     word = "</s>"; // NOTE: not sure why recording delimiter
+                // }
+                auto &tmpWordData = tmpWords[word];
+                if (tmpWordData.frequency == 0) {
+                    tmpWordData.word = word;
+                }
+                tmpWordData.frequency++;
+                m_totalWords++;
+                
+                // NOTE: not sure what to do with progress bar
+                // if (_progressCallback != nullptr) {
+                //     if (wordReader.offset() - progressOffset >= _trainWordsMapper->size() / 10000 - 1) {
+                //         _progressCallback(static_cast<float>(wordReader.offset())
+                //                           / _trainWordsMapper->size() * 100.0f);
+                //         progressOffset = wordReader.offset();
+                //     }
+                // }
+            }    
+        }
+        
+        /*
+        //off_t progressOffset = 0;
+        using word_t = std::string;
+        using text_t = std::vector<word_t>;
+        using texts_t = std::vector<text_t>;
+         
+        texts_t texts = (*corpus).data;
+        //for (text_t text:corpus->data)
         for (size_t h = 0; h < texts.size(); h++) {
-            Text text = texts[h];
+            text_t text = texts[h];
+            //    for (size_t i = 0; i < (corpus.get() + h).size(); i++) {
+            //for (word_t word:text) {
             for (size_t i = 0; i < text.size(); i++) {
                 
-                std::string word = text[i];
+                word_t word = text[i];
                 // padding
                 if (word.empty()) {
                     continue;
@@ -66,10 +107,11 @@ namespace w2v {
                 // }
             }
         }
-
+        */
+        
         // remove stop words from the words set
-        for (auto &stopWord:stopWords) {
-            tmpWords.erase(stopWord);
+        for (auto &word:stopWords.data) {
+            tmpWords.erase(word);
         }
         
         // NOTE: delimiter could be ignored above

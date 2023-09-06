@@ -47,8 +47,17 @@ Rcpp::List w2v_train(Rcpp::List texts_,
    std::string wordDelimiterChars = " \n,.-!?:;/\"#$%&'()*+<=>@[]\\^_`{|}~\t\v\f\r";
    std::string endOfSentenceChars = ".\n?!";
    */
-  Texts texts = Rcpp::as<Texts>(texts_);
-  Types stopWords = Rcpp::as<Types>(stopWords_);
+
+  //texts_t texts = Rcpp::as<texts_t>(texts_);
+  //words_t stopWords = Rcpp::as<words_t>(stopWords_);
+  
+  texts_t texts = Rcpp::as<texts_t>(texts_);
+  w2v::corpus_t corpus(texts);
+  
+  // NOTE: consider recording in corpus
+  words_t words = Rcpp::as<words_t>(stopWords_);
+  w2v::stopWords_t stopWords(words);
+  
   w2v::trainSettings_t trainSettings;
   trainSettings.minWordFreq = minWordFreq;
   trainSettings.size = size;
@@ -72,7 +81,7 @@ Rcpp::List w2v_train(Rcpp::List texts_,
   std::size_t totalWords;
   if (verbose) {
     Progress p(100, true);
-    trained = model->train(trainSettings, texts, stopWords,
+    trained = model->train(trainSettings, corpus, stopWords,
                            [&p] (float _percent) {
                              p.update(_percent/2);
                              /*
@@ -111,7 +120,7 @@ Rcpp::List w2v_train(Rcpp::List texts_,
     );
     //std::cout << std::endl;
   } else {
-    trained = model->train(trainSettings, texts, stopWords, 
+    trained = model->train(trainSettings, corpus, stopWords, 
                            nullptr, 
                            [&vocWords, &trainWords, &totalWords] (std::size_t _vocWords, std::size_t _trainWords, std::size_t _totalWords) {
                              /*
@@ -148,7 +157,7 @@ Rcpp::List w2v_train(Rcpp::List texts_,
     Rcpp::Named("data") = Rcpp::List::create(
       //Rcpp::Named("file") = trainFile,
       //Rcpp::Named("stopwords") = stopWordsFile,
-      Rcpp::Named("stopwords") = stopWords,
+      Rcpp::Named("stopwords") = words,
       Rcpp::Named("n") = totalWords,
       Rcpp::Named("n_vocabulary") = trainWords
     ),

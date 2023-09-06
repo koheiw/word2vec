@@ -70,8 +70,8 @@ namespace w2v {
         //              w2vModel_t::vocabularyProgressCallback_t _progressCallback,
         //              w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;
         
-        vocabulary_t(const Texts &text,
-                     const std::vector<std::string> stopWords,
+        vocabulary_t(const corpus_t &_corpus,
+                     const stopWords_t &_stopWords,
                      uint16_t _minFreq,
                      w2vModel_t::vocabularyProgressCallback_t _progressCallback,
                      w2vModel_t::vocabularyStatsCallback_t _statsCallback) noexcept;

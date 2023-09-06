@@ -12,9 +12,12 @@
 #include "trainer.hpp"
 
 namespace w2v {
+
     bool w2vModel_t::train(const trainSettings_t &_trainSettings,
-                           const Texts &_texts,
-                           const std::vector<std::string> &_stopWords,
+                           corpus_t &_corpus,
+                           stopWords_t &_stopWords,
+                           //const corpus_t &_corpus,
+                           //const stopWords_t &_stopWords,
                            vocabularyProgressCallback_t _vocabularyProgressCallback,
                            vocabularyStatsCallback_t _vocabularyStatsCallback,
                            trainProgressCallback_t _trainProgressCallback) noexcept {
@@ -28,8 +31,9 @@ namespace w2v {
             // }
 
             // build vocabulary, skip stop-words and words with frequency < minWordFreq
-            //std::shared_ptr<Texts> texts(_texts); NOTE: need to define a template for Texts
-            std::shared_ptr<vocabulary_t> vocabulary(new vocabulary_t(_texts,
+            //std::shared_ptr<corpus_t>(_corpus); 
+            //std::shared_ptr<stopWords_t> stopWords(_stopWords); 
+            std::shared_ptr<vocabulary_t> vocabulary(new vocabulary_t(_corpus,
                                                                       _stopWords,
                                                                       _trainSettings.minWordFreq,
                                                                       _vocabularyProgressCallback,
@@ -44,7 +48,7 @@ namespace w2v {
             std::vector<float> _trainMatrix;
             trainer_t(std::make_shared<trainSettings_t>(_trainSettings),
                       vocabulary,
-                      _texts, // NOTE: consider using std::shared_ptr
+                      std::make_shared<corpus_t>(_corpus), // NOTE: consider using std::shared_ptr
                       _trainProgressCallback)(_trainMatrix);
 
             std::size_t wordIndex = 0;

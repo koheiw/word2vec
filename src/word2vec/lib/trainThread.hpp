@@ -54,7 +54,7 @@ namespace w2v {
         struct sharedData_t final {
             std::shared_ptr<trainSettings_t> trainSettings; ///< trainSettings structure
             std::shared_ptr<vocabulary_t> vocabulary; ///< words data
-            std::shared_ptr<Texts> texts; ///< train data file access object // NOTE: change to Texts
+            std::shared_ptr<corpus_t> corpus; ///< train data file access object // NOTE: change to Texts
             std::shared_ptr<std::vector<float>> bpWeights; ///< back propagation weights
             std::shared_ptr<std::vector<float>> expTable; ///< exp(x) / (exp(x) + 1) values lookup table
             std::shared_ptr<huffmanTree_t> huffmanTree; ///< Huffman tree used by hierarchical softmax

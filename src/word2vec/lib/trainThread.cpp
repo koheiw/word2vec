@@ -45,7 +45,7 @@ namespace w2v {
         // if (!m_sharedData.fileMapper) {
         //     throw std::runtime_error("file mapper object is not initialized");
         // }
-        auto shift = m_sharedData.texts->size() / m_sharedData.trainSettings->threads;
+        auto shift = m_sharedData.corpus->data.size() / m_sharedData.trainSettings->threads;
         auto startFrom = shift * _id;
         // NOTE: change to Texts?
         // auto stopAt = (_id == m_sharedData.trainSettings->threads - 1)

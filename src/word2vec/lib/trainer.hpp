@@ -45,9 +45,8 @@ namespace w2v {
         //           std::function<void(float, float)> _progressCallback);
         
         trainer_t(const std::shared_ptr<trainSettings_t> &_trainSettings,
-                 const std::shared_ptr<vocabulary_t> &_vocabulary,
-                 const Texts &_texts,
-                 //const std::shared_ptr<Texts> &_texts, // NOTE: change to Texts
+                  const std::shared_ptr<vocabulary_t> &_vocabulary,
+                  const std::shared_ptr<corpus_t> &_corpus,
                  std::function<void(float, float)> _progressCallback);
 
         /**
