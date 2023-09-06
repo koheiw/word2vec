@@ -30,6 +30,7 @@ namespace w2v {
         texts_t data;
         
         // Constructors
+        corpus_t(): data() {}
         corpus_t(texts_t texts): data(texts) {}
         
         // Methods
@@ -47,6 +48,7 @@ namespace w2v {
         words_t data; 
         
         // Constructors  
+        stopWords_t(): data() {}
         stopWords_t(std::vector<std::string> words): data(words) {}
         
         // Methods
